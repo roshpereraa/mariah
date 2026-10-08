@@ -38,10 +38,11 @@ sound:
 1. **A local file you own.** Drop a licensed copy at
    `audio/all-i-want-for-christmas-is-you.mp3` and it plays. That path is
    gitignored, so your copy stays on your machine.
-2. **YouTube's embed player.** The official upload, streamed through the
-   iframe API — the licensed route for playing the real record on a site. The
-   video ID lives in `js/config.js` and can be swapped for any other official
-   upload.
+2. **YouTube's embed player.** The official MariahCareyVEVO uploads, streamed
+   through the iframe API — the licensed route for playing the real record on
+   a site. `js/config.js` holds an ordered list of video IDs and each is tried
+   in turn, so one being pulled or region-blocked is not fatal. If the browser
+   refuses unmuted autoplay it retries muted and unmutes once playing.
 3. **An original Web Audio mix.** Sleigh bells, celesta chords, a walking bass
    and a glockenspiel melody, generated live in the browser over a doo-wop
    progression. Original music written for this site, so there is always
@@ -49,6 +50,13 @@ sound:
 
 Browsers block autoplay with sound, which is why the splash screen exists: one
 click is the gesture that unlocks audio, and it starts everything at once.
+
+Whichever source wins, it loops forever. A watchdog re-checks every few seconds
+(and whenever you return to the tab) and restarts anything that ended, stalled
+or got suspended in the background — but it never overrides a pause you asked
+for. The generated mix runs its scheduler clock in a Web Worker, because
+main-thread timers get throttled to roughly once a second in a background tab,
+which would starve the audio graph.
 
 ## Running it locally
 

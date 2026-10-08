@@ -10,8 +10,27 @@
 const BPM = 124;
 const BEAT = 60 / BPM;
 const BEATS_PER_BAR = 4;
-const LOOKAHEAD = 0.25;   // seconds of audio scheduled in advance
+const LOOKAHEAD = 0.5;    // seconds of audio scheduled in advance
 const TICK = 25;          // scheduler wake-up interval (ms)
+
+/**
+ * The scheduler clock lives in a worker. Browsers throttle main-thread timers
+ * to about once a second in a background tab, which would leave the audio
+ * graph starved and the music stuttering or silent on a tab people have
+ * switched away from. Worker timers keep ticking.
+ */
+const CLOCK_SRC = `
+  let id = null;
+  onmessage = (e) => {
+    if (e.data.start) {
+      clearInterval(id);
+      id = setInterval(() => postMessage('tick'), e.data.interval);
+    } else {
+      clearInterval(id);
+      id = null;
+    }
+  };
+`;
 
 const midiToHz = (m) => 440 * Math.pow(2, (m - 69) / 12);
 
@@ -58,7 +77,8 @@ export class ProceduralSong {
     this.noise = this._noiseBuffer(1);
     this.beat = 0;
     this.nextNoteTime = 0;
-    this.timer = null;
+    this.clock = null;      // Worker driving the scheduler, or a timer fallback
+    this.clockUrl = null;
   }
 
   // ---------------------------------------------------------------- buffers
@@ -200,7 +220,18 @@ export class ProceduralSong {
   }
 
   _tick = () => {
-    const horizon = this.ctx.currentTime + LOOKAHEAD;
+    const now = this.ctx.currentTime;
+
+    // If the clock was starved anyway (a suspended context, a sleeping laptop),
+    // don't dump a backlog of notes dated in the past — they would all fire at
+    // once as a blast of noise. Resume from the next whole bar instead.
+    if (this.nextNoteTime < now) {
+      const missed = Math.ceil((now - this.nextNoteTime) / (BEAT * 0.5));
+      this.beat += missed;
+      this.nextNoteTime += missed * BEAT * 0.5;
+    }
+
+    const horizon = now + LOOKAHEAD;
     while (this.nextNoteTime < horizon) {
       this._schedule(this.beat, this.nextNoteTime);
       this.beat += 0.5;                 // advance one eighth note
@@ -209,16 +240,35 @@ export class ProceduralSong {
   };
 
   start() {
-    if (this.timer) return;
+    if (this.clock) return;
     this.nextNoteTime = this.ctx.currentTime + 0.08;
-    this.timer = setInterval(this._tick, TICK);
+
+    try {
+      this.clockUrl = URL.createObjectURL(new Blob([CLOCK_SRC], { type: 'text/javascript' }));
+      this.clock = new Worker(this.clockUrl);
+      this.clock.onmessage = this._tick;
+      this.clock.postMessage({ start: true, interval: TICK });
+    } catch {
+      // Workers blocked (strict CSP, ancient browser) — a main-thread timer
+      // still works, it just throttles in a background tab.
+      this.clock = { fallback: setInterval(this._tick, TICK) };
+    }
+
     this._tick();
   }
 
   stop() {
-    clearInterval(this.timer);
-    this.timer = null;
+    if (!this.clock) return;
+    if (this.clock.fallback) {
+      clearInterval(this.clock.fallback);
+    } else {
+      this.clock.postMessage({ start: false });
+      this.clock.terminate();
+      URL.revokeObjectURL(this.clockUrl);
+      this.clockUrl = null;
+    }
+    this.clock = null;
   }
 
-  get playing() { return this.timer !== null; }
+  get playing() { return this.clock !== null; }
 }
