@@ -1,0 +1,12 @@
+{
+  "name": "all-i-want-for-christmas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Christmassy fan tribute to Mariah Carey's \"All I Want for Christmas Is You\" — music on open, snowfall, a reindeer cursor and five mini-games.",
+  "scripts": {
+    "dev": "npx --yes serve . -l 4173",
+    "start": "npx --yes serve . -l 4173"
+  },
+  "keywords": ["christmas", "mariah-carey", "web-audio", "canvas", "mini-games"],
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+node_modules/
+.vercel/
+.DS_Store
+*.log
+
+# Licensed audio you drop in yourself is never committed.
+audio/*.mp3
+audio/*.m4a
+audio/*.ogg
+audio/*.wav

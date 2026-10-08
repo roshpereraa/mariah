@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All I Want for Christmas Is You — A Festive Tribute</title>
+<meta name="description" content="A Christmassy fan tribute to Mariah Carey's 'All I Want for Christmas Is You' — music on open, falling snow, a reindeer cursor and five Christmas mini-games.">
+<meta name="theme-color" content="#0a1026">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="All I Want for Christmas Is You — A Festive Tribute">
+<meta property="og:description" content="Snow, sleigh bells, a reindeer cursor and five Christmas mini-games.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/layout.css">
+<link rel="stylesheet" href="styles/games.css">
+</head>
+<body>
+
+<div class="starfield" aria-hidden="true"></div>
+<canvas id="snow-canvas" aria-hidden="true"></canvas>
+<div id="yt-host" aria-hidden="true"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============================ splash gate ============================ -->
+<div id="splash">
+  <div class="splash__inner">
+    <p class="splash__kicker">A festive fan tribute</p>
+    <h1 class="splash__title gold-text">All I Want<br>for Christmas</h1>
+    <p class="splash__sub">is you</p>
+    <button id="splash-btn" class="btn splash__btn" type="button">
+      Open the music box &nbsp;&#127925;
+    </button>
+    <p class="splash__note">
+      Browsers only allow sound after a click — so this one button starts the
+      music, the snow and the whole thing.
+    </p>
+  </div>
+</div>
+
+<!-- ============================== top bar ============================== -->
+<header class="topbar">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M20 22 L14 11 M14 11 L6 9 M14 11 L13 2 M44 22 L50 11 M50 11 L58 9 M50 11 L51 2"
+            fill="none" stroke="#f0c871" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="32" cy="38" rx="17" ry="18" fill="#a9703f"/>
+      <ellipse cx="32" cy="46" rx="10" ry="8" fill="#d9ad7c"/>
+      <circle cx="25" cy="34" r="3.4" fill="#20120a"/>
+      <circle cx="39" cy="34" r="3.4" fill="#20120a"/>
+      <circle cx="32" cy="47" r="5.4" fill="#ff2a40"/>
+    </svg>
+    <span>All I Want&nbsp;for&nbsp;Christmas</span>
+  </a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#arcade-section">Arcade</a>
+    <a href="#story">The Song</a>
+    <a href="#lyrics">Lyrics</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- =============================== hero =============================== -->
+  <section class="shell hero">
+    <p class="hero__kicker"><span class="pill">Since 1994 &middot; Still undefeated</span></p>
+    <h1 class="hero__title gold-text">
+      All I Want for Christmas
+      <small>is you</small>
+    </h1>
+    <p class="hero__lead">
+      Mariah opens her mouth, the world puts up a tree. This is a fan-made
+      corner of the internet for the greatest Christmas song ever recorded —
+      with falling snow, a reindeer for a cursor, and five mini-games to lose
+      an afternoon to.
+    </p>
+    <div class="hero__cta">
+      <a class="btn" href="#arcade-section">Play the games &nbsp;&#127918;</a>
+      <a class="btn btn--ghost" href="#story">Read the story</a>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Make my wish come true</span><span>&#10052;</span>
+        <span>All I want for Christmas is you</span><span>&#10057;</span>
+        <span>I don't want a lot for Christmas</span><span>&#10052;</span>
+        <span>Make my wish come true</span><span>&#10057;</span>
+        <span>All I want for Christmas is you</span><span>&#10052;</span>
+        <span>I don't want a lot for Christmas</span><span>&#10057;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== stats =============================== -->
+  <section class="shell section" style="padding-top:0">
+    <div class="stats reveal">
+      <div class="stat">
+        <span class="stat__num gold-text" id="days-to-go">—</span>
+        <span class="stat__label" id="days-to-go-label">Days to Christmas</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num gold-text">1994</span>
+        <span class="stat__label">Year released</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num gold-text">2019</span>
+        <span class="stat__label">Year it hit No.&nbsp;1</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num gold-text">5</span>
+        <span class="stat__label">Mini-games below</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== arcade ============================== -->
+  <section class="shell section" id="arcade-section">
+    <div class="section__head reveal">
+      <p class="pill">Santa's Arcade</p>
+      <h2 class="section__title gold-text">Five games, one soundtrack</h2>
+      <p>
+        Everything runs right here in the page — no loading screens, no accounts.
+        Your best score for each game is remembered on this device.
+      </p>
+    </div>
+    <div class="arcade" id="arcade">
+      <noscript>
+        <p class="card">The mini-games need JavaScript switched on. The snow is
+        prettier with it too.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- =============================== story ============================== -->
+  <section class="shell section" id="story">
+    <div class="section__head reveal">
+      <p class="pill">The Song</p>
+      <h2 class="section__title gold-text">A twenty-five-year run-up</h2>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <span class="card__icon" aria-hidden="true">&#127925;</span>
+        <h3>Written in a hurry</h3>
+        <p>
+          Mariah Carey and Walter Afanasieff put the song together for
+          <em>Merry Christmas</em>, her fourth studio album, released in
+          October 1994. It was built to sound like a 1960s Christmas record
+          rather than a 1990s one — sleigh bells, wall-of-sound piano, the lot.
+        </p>
+      </article>
+      <article class="card reveal">
+        <span class="card__icon" aria-hidden="true">&#128200;</span>
+        <h3>Number one, eventually</h3>
+        <p>
+          It took until December 2019 for the song to finally top the Billboard
+          Hot 100 — twenty-five years after release, and Mariah's nineteenth
+          chart-topper. It has returned to the summit every festive season since.
+        </p>
+      </article>
+      <article class="card reveal">
+        <span class="card__icon" aria-hidden="true">&#127876;</span>
+        <h3>A seasonal institution</h3>
+        <p>
+          It soundtracks the end of <em>Love Actually</em>, every shopping centre
+          from November onwards, and one very famous annual announcement that it
+          is officially time. The Queen of Christmas does not take the crown off.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================== lyrics ============================== -->
+  <section class="shell section" id="lyrics">
+    <div class="section__head reveal">
+      <p class="pill">Sing Along</p>
+      <h2 class="section__title gold-text">The bit everybody knows</h2>
+      <p>
+        You already have the words. Here is the shape of them — the full lyrics
+        belong to their publishers, so this is just the chorus everyone shouts.
+      </p>
+    </div>
+    <div class="cards">
+      <article class="card reveal" style="text-align:center">
+        <p class="script" style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--gold-bright);margin:0">
+          “Make my wish come true —<br>all I want for Christmas is you.”
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================== about ============================== -->
+  <section class="shell section" id="about">
+    <div class="section__head reveal">
+      <p class="pill">About</p>
+      <h2 class="section__title gold-text">How this thing works</h2>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <span class="card__icon" aria-hidden="true">&#128266;</span>
+        <h3>The music</h3>
+        <p>
+          The player tries three sources in order: a licensed copy of the record
+          if one is present, then the official upload via YouTube's embed player,
+          and finally an original sleigh-bell mix generated live in your browser.
+          Something always plays.
+        </p>
+      </article>
+      <article class="card reveal">
+        <span class="card__icon" aria-hidden="true">&#129446;</span>
+        <h3>The cursor</h3>
+        <p>
+          That is a hand-drawn reindeer following your pointer, complete with a
+          glowing red nose, a happier face while you hold a click, and a trail of
+          magic dust behind it.
+        </p>
+      </article>
+      <article class="card reveal">
+        <span class="card__icon" aria-hidden="true">&#10052;</span>
+        <h3>The snow</h3>
+        <p>
+          A few hundred flakes on a canvas, with parallax depth and a wind that
+          wanders. It respects your reduced-motion setting, as does everything
+          else that moves here.
+        </p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- ============================= music dock ============================ -->
+<div class="dock is-paused" id="dock" role="group" aria-label="Music player">
+  <button class="dock__btn" id="dock-toggle" type="button" aria-label="Pause the music">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path id="dock-icon" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+  </button>
+  <div class="dock__viz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="dock__meta">
+    <span class="dock__title" id="dock-title">All I Want for Christmas Is You</span>
+    <span class="dock__sub" id="dock-sub">Mariah Carey</span>
+  </div>
+  <label class="sr-only" for="dock-volume">Volume</label>
+  <input class="dock__slider" id="dock-volume" type="range" min="0" max="100" value="55">
+</div>
+
+<!-- ============================ game stage ============================= -->
+<div id="stage" role="dialog" aria-modal="true" aria-labelledby="stage-title" aria-hidden="true">
+  <div class="stage__frame">
+    <div class="stage__bar">
+      <h2 class="stage__name" id="stage-title">Game</h2>
+      <button class="stage__close" id="stage-close" type="button" aria-label="Close game">&times;</button>
+    </div>
+    <div class="stage__body" id="stage-body"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Made with sleigh bells and too much tinsel &middot; <span id="year">2025</span></p>
+  <small>
+    An unofficial fan tribute. “All I Want for Christmas Is You” was written by
+    Mariah Carey and Walter Afanasieff; all rights in the song and recording
+    belong to their respective owners. This site is not affiliated with, endorsed
+    by, or connected to Mariah Carey or her labels. No recording is hosted here —
+    the official version is streamed through YouTube's embed player, and the
+    fallback mix is original music generated in your browser.
+  </small>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
