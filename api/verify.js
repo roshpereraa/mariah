@@ -7,24 +7,25 @@
  *
  * Delete once the track list in js/config.js is confirmed.
  */
-export default async function handler(req) {
+module.exports = async (req, res) => {
   const url = new URL(req.url, `https://${req.headers.host}`);
-  const ids = (url.searchParams.get('ids') || '').split(',').map((s) => s.trim()).filter(Boolean);
+  const ids = (url.searchParams.get('ids') || '')
+    .split(',').map((s) => s.trim()).filter(Boolean).slice(0, 12);
 
-  const results = await Promise.all(ids.map(async (id) => {
-    const target = `https://www.youtube.com/oembed?url=${encodeURIComponent(
-      `https://www.youtube.com/watch?v=${id}`)}&format=json`;
+  const results = [];
+  for (const id of ids) {
+    const target = 'https://www.youtube.com/oembed?url='
+      + encodeURIComponent(`https://www.youtube.com/watch?v=${id}`) + '&format=json';
     try {
-      const res = await fetch(target);
-      if (!res.ok) return { id, ok: false, status: res.status };
-      const data = await res.json();
-      return { id, ok: true, title: data.title, author: data.author_name };
+      const r = await fetch(target, { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) { results.push({ id, ok: false, status: r.status }); continue; }
+      const data = await r.json();
+      results.push({ id, ok: true, title: data.title, author: data.author_name });
     } catch (err) {
-      return { id, ok: false, error: String(err) };
+      results.push({ id, ok: false, error: String(err && err.message || err) });
     }
-  }));
+  }
 
-  return new Response(JSON.stringify({ results }, null, 2), {
-    headers: { 'content-type': 'application/json' },
-  });
-}
+  res.setHeader('content-type', 'application/json');
+  res.status(200).send(JSON.stringify({ results }, null, 2));
+};
