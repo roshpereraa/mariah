@@ -81,7 +81,7 @@ export class MusicPlayer extends EventTarget {
       }, { once: true });
 
       // No file committed in /audio by default, so this normally times out fast.
-      const timer = setTimeout(() => finish(false), 3500);
+      const timer = setTimeout(() => finish(false), 2500);
     });
   }
 

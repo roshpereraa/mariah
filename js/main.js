@@ -70,14 +70,15 @@ function bootSplash() {
 
   let entering = false;
 
-  async function enter() {
+  function enter() {
     if (entering) return;
     entering = true;
     button.disabled = true;
-    button.textContent = 'Cueing the sleigh bells…';
 
-    // The click is the gesture browsers require before audio may play.
-    await music.start();
+    // The click is the gesture browsers require before audio may play. Kick the
+    // source chain off, but don't hold the page behind it — walking the chain
+    // can take a few seconds, and the dock announces whatever wins.
+    music.start().catch((err) => console.error('Music failed to start', err));
 
     splash.classList.add('is-hidden');
     setTimeout(() => splash.remove(), 900);

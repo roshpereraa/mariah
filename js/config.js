@@ -22,7 +22,8 @@ export const CONFIG = {
   useYouTube: true,
 
   // How long to give YouTube before falling back to the procedural track (ms).
-  youtubeTimeout: 6500,
+  // Kept short: this is dead air for the listener if the embed never starts.
+  youtubeTimeout: 5000,
 
   defaultVolume: 0.55,
 
