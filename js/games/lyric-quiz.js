@@ -16,22 +16,22 @@ const POOL = [
     q: 'Which Mariah Carey album did "All I Want for Christmas Is You" first appear on?',
     a: 'Merry Christmas',
     wrong: ['Music Box', 'Daydream', 'Butterfly'],
-    note: 'Her fourth studio album, released in October 1994.',
+    note: 'Her fourth album, out in October 1994.',
   },
   {
     q: 'Who co-wrote and co-produced the song with Mariah?',
     a: 'Walter Afanasieff',
     wrong: ['Babyface', 'David Foster', 'Jermaine Dupri'],
-    note: 'A long-running Carey collaborator through the 1990s.',
+    note: 'He produced most of her ballads that decade.',
   },
   {
     q: 'In which year did the song finally hit No. 1 on the Billboard Hot 100?',
     a: '2019',
     wrong: ['1994', '2005', '2021'],
-    note: 'Twenty-five years after it was released. Patience pays.',
+    note: 'Twenty-five years after it came out.',
   },
   {
-    q: 'Complete the line: "I won’t even wish for …"',
+    q: 'Complete the line: “I won’t even wish for …”',
     a: 'snow',
     wrong: ['a sleigh ride', 'presents', 'mistletoe'],
     note: '"I won’t ask for much this Christmas / I won’t even wish for snow."',
@@ -40,7 +40,7 @@ const POOL = [
     q: 'Where is she "just gonna keep on waiting"?',
     a: 'Underneath the mistletoe',
     wrong: ['By the fireplace', 'Beside the Christmas tree', 'Out in the snow'],
-    note: 'The most famous waiting spot in pop music.',
+    note: 'The most famous loitering in pop.',
   },
   {
     q: 'According to the lyrics, what will Santa Claus NOT make her happy with?',
@@ -58,19 +58,19 @@ const POOL = [
     q: 'Which 2003 Christmas film closes with a schoolgirl belting the song?',
     a: 'Love Actually',
     wrong: ['Elf', 'The Holiday', 'Bad Santa'],
-    note: 'Olivia Olson’s nativity-play showstopper.',
+    note: 'Sung by Olivia Olson at the nativity play.',
   },
   {
     q: 'What is Mariah’s widely used festive nickname?',
     a: 'Queen of Christmas',
     wrong: ['Duchess of December', 'Mrs Claus', 'Lady Tinsel'],
-    note: 'Defended annually, from 1 November onwards.',
+    note: 'Defended every year from 1 November.',
   },
   {
     q: 'What was the 2019 re-release of the music video called?',
     a: 'Make My Wish Come True Edition',
     wrong: ['Snow Globe Edition', 'Silver Bells Edition', 'Diamond Sleigh Edition'],
-    note: 'Named after a line from the chorus.',
+    note: 'Taken from a line in the chorus.',
   },
 ];
 
@@ -78,7 +78,7 @@ export default {
   id: 'lyric-quiz',
   name: 'Mistletoe Trivia',
   emoji: '\u{1F3B5}',
-  blurb: 'Six questions on the song that owns December — the writing, the chart run, and the lines you have been singing wrong since 1994.',
+  blurb: 'Six questions on the record, and on the words you have been getting wrong since 1994.',
   scoreLabel: 'points',
 
   mount(root, host) {

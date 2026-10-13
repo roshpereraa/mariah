@@ -44,7 +44,7 @@ export function startSnow(canvas) {
     wind += (windTarget - wind) * 0.015;
 
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#f2e7d2';
 
     for (const f of flakes) {
       f.phase += 0.02 * f.sway * dt;
@@ -58,7 +58,7 @@ export function startSnow(canvas) {
       ctx.globalAlpha = f.alpha;
       // Only the nearest flakes get the (expensive) halo.
       ctx.shadowBlur = f.depth > 0.62 ? 7 : 0;
-      ctx.shadowColor = 'rgba(214,232,255,.9)';
+      ctx.shadowColor = 'rgba(242,231,210,.85)';
       ctx.beginPath();
       ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
       ctx.fill();

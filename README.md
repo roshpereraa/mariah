@@ -1,10 +1,15 @@
-# All I Want for Christmas Is You — a festive tribute
+# All I Want for Christmas Is You — a sleeve note
 
-A fan-made Christmas site for the greatest holiday song ever recorded. Music
-starts the moment you open it, snow falls, a reindeer follows your pointer, and
-there are five mini-games to lose an afternoon to.
+A fan tribute to Carey and Afanasieff's 1994 single, built as a record sleeve.
+Side A is the song and the liner notes. Side B is five Christmas games. The
+music plays throughout, a reindeer follows the pointer, and it snows.
 
-No build step, no framework, no dependencies — plain ES modules, canvas and the
+The song is a deliberate pastiche of a 1963 Phil Spector Christmas record, so
+the design follows it there: printed paper stock, flat spot colours, hard rules
+instead of soft shadows, and the games set as an LP track listing rather than
+as cards.
+
+No build step, no framework, no dependencies. Plain ES modules, canvas and the
 Web Audio API.
 
 ## What's in it
@@ -14,8 +19,8 @@ Web Audio API.
 | **Music on open** | A three-tier source chain that always produces sound (see below) |
 | **Reindeer cursor** | Hand-drawn SVG cursor with a glowing nose, a happier face while you hold a click, and a trail of magic dust |
 | **Snowfall** | A few hundred canvas flakes with parallax depth and a wind that wanders |
-| **Five mini-games** | Present Catch, Elf Patrol, Ornament Memory, Hit The Note, Mistletoe Trivia |
-| **High scores** | Kept per game in `localStorage`, shown on the launcher cards |
+| **Five games on side B** | Present Catch, Elf Patrol, Ornament Memory, The Whistle Note, Mistletoe Trivia |
+| **High scores** | Kept per game in `localStorage`, printed beside each track like a duration |
 
 ### The games
 
@@ -24,8 +29,8 @@ Web Audio API.
 - **Elf Patrol** — whack-an-elf in the snowdrifts. Bop the elves, spare the
   imps, leave the wrapped gifts alone.
 - **Ornament Memory** — sixteen baubles, eight pairs. Fewer moves, higher score.
-- **Hit The Note** — hold to climb, release to fall, keep the needle inside the
-  moving golden band. A tribute to the whistle register.
+- **The Whistle Note** — hold to climb, release to fall, keep the needle inside
+  the moving golden band.
 - **Mistletoe Trivia** — six questions drawn from a pool of ten, on the song,
   its chart run and its lyrics.
 
@@ -78,9 +83,10 @@ needs no build command and no output directory — point it at the repo root.
 ```
 index.html            markup and the page shell
 styles/
-  base.css            design tokens, reset, the reindeer cursor, snow, type
-  layout.css          splash gate, hero, nav, music dock, sections, footer
-  games.css           arcade cards, modal stage, HUD, each game's chrome
+  base.css            spot colours, paper grain, type, buttons, the cursor
+  layout.css          splash, masthead, sleeve front, liner notes, track
+                      listing, colophon, dock
+  games.css           modal stage, scoreboard, each game's chrome
 js/
   config.js           music sources and tunables
   main.js             entry point — boots scenery, splash, dock, arcade
@@ -89,7 +95,7 @@ js/
   sfx.js              game sound effects, sharing the player's AudioContext
   snow.js  cursor.js  scenery
   ui.js  storage.js   element builder, toast, reveals, high scores
-  arcade.js           launcher cards and the modal stage
+  arcade.js           the side-B track listing and the modal stage
   games/              one module per game, plus shared HUD helpers
 assets/               reindeer cursor art and the favicon
 audio/                where you drop your own licensed copy (gitignored)

@@ -1,118 +1,116 @@
 /* ===========================================================
-   Base: tokens, reset, reindeer cursor, snow, typography
+   Base — a printed record sleeve, c. 1963.
+   Flat spot colours on textured stock. No blur, no glass.
    =========================================================== */
 
 :root {
-  /* Palette — midnight velvet, holly red, candlelight gold */
-  --midnight:      #0a1026;
-  --midnight-deep: #050917;
-  --velvet:        #141c3a;
-  --holly:         #c81d34;
-  --holly-bright:  #ef2944;
-  --holly-deep:    #7d0b1d;
-  --pine:          #0b3b27;
-  --pine-green:    #0f5132;
-  --gold:          #f0c871;
-  --gold-bright:   #ffdf9a;
-  --gold-deep:     #b8893a;
-  --snow:          #f7fbff;
-  --snow-dim:      #c3cfe4;
-  --ink:           #0a1026;
+  /* Spot colours, as if this went through a four-colour press */
+  --ink:        #101d18;   /* deep pine, almost black */
+  --ink-deep:   #0a140f;
+  --ink-soft:   #1b2f26;
+  --cream:      #f2e7d2;   /* the paper */
+  --cream-warm: #e8d9bd;
+  --cream-dim:  #b9a888;
+  --red:        #b3342a;
+  --red-bright: #d2473a;
+  --green:      #2d5a42;
+  --gold:       #c9992f;
+  --gold-warm:  #e0b958;
 
-  --surface:        rgba(255, 255, 255, 0.055);
-  --surface-strong: rgba(255, 255, 255, 0.095);
-  --hairline:       rgba(255, 255, 255, 0.14);
-  --hairline-gold:  rgba(240, 200, 113, 0.32);
+  /* Roles */
+  --bg:        var(--ink);
+  --fg:        var(--cream);
+  --fg-dim:    var(--cream-dim);
+  --rule:      rgba(242, 231, 210, 0.26);
+  --rule-firm: rgba(242, 231, 210, 0.55);
 
-  --radius:    20px;
-  --radius-sm: 12px;
-  --radius-lg: 30px;
+  --font-display: "Abril Fatface", Georgia, "Times New Roman", serif;
+  --font-label:   "Oswald", "Haettenschweiler", Impact, sans-serif;
+  --font-body:    "Crimson Pro", Georgia, "Times New Roman", serif;
+  --font-script:  "Pinyon Script", "Snell Roundhand", cursive;
+  --font-num:     "Oswald", ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-soft:  0 18px 50px -18px rgba(0, 0, 0, 0.75);
-  --shadow-glow:  0 0 60px -12px rgba(240, 200, 113, 0.35);
-  --shadow-holly: 0 14px 40px -14px rgba(200, 29, 52, 0.6);
+  --measure: 34rem;
 
-  --font-display: "Mountains of Christmas", "Playfair Display", Georgia, serif;
-  --font-script:  "Great Vibes", "Snell Roundhand", cursive;
-  --font-body:    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* Mountains of Christmas has decorative numerals that read badly, so
-     anything containing digits uses this instead. */
-  --font-numeric: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Printed-paper grain, overlaid on everything */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* Reindeer cursors (hotspot near the glowing nose) */
   --cursor-reindeer: url("../assets/reindeer-cursor.svg") 16 6, auto;
   --cursor-reindeer-active: url("../assets/reindeer-cursor-active.svg") 16 6, pointer;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-body);
-  color: var(--snow);
-  background:
-    radial-gradient(1200px 700px at 12% -5%, #22305e 0%, transparent 62%),
-    radial-gradient(900px 620px at 88% 4%, #4a1230 0%, transparent 60%),
-    radial-gradient(1100px 800px at 50% 110%, #123a2c 0%, transparent 58%),
-    linear-gradient(180deg, var(--midnight) 0%, var(--midnight-deep) 100%);
-  background-attachment: fixed;
+  font-size: clamp(1.02rem, 0.4vw + 0.95rem, 1.14rem);
+  line-height: 1.62;
   overflow-x: hidden;
-  line-height: 1.6;
 }
 
-/* ---- The reindeer cursor, everywhere ---- */
+/* The press texture. Sits above the background, below the content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+}
+
+/* ---- Reindeer cursor ---- */
 body, body * { cursor: var(--cursor-reindeer); }
+a, button, summary, [role="button"], input[type="range"], select { cursor: var(--cursor-reindeer-active); }
+input[type="text"], textarea { cursor: text; }
+body.cursor-active, body.cursor-active * { cursor: var(--cursor-reindeer-active); }
 
-a, button, summary, [role="button"], .is-clickable,
-input[type="button"], input[type="submit"], select {
-  cursor: var(--cursor-reindeer-active);
-}
-
-/* Text fields keep a usable caret cursor */
-input[type="text"], input[type="number"], textarea { cursor: text; }
-
-body.cursor-native, body.cursor-native * { cursor: auto; }
-body.cursor-native a, body.cursor-native button { cursor: pointer; }
-
-/* ---- Typography ---- */
-h1, h2, h3, h4 {
+/* ---- Type ---- */
+h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.08;
-  margin: 0 0 0.5em;
-  letter-spacing: -0.01em;
-}
-
-p { margin: 0 0 1rem; color: var(--snow-dim); }
-
-a { color: var(--gold-bright); text-decoration-color: var(--hairline-gold); text-underline-offset: 3px; }
-a:hover { color: var(--snow); }
-
-.script {
-  font-family: var(--font-script);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  line-height: 0.94;
+  letter-spacing: -0.012em;
+  margin: 0 0 0.4em;
+  text-wrap: balance;
 }
 
-.gold-text {
-  background: linear-gradient(104deg, var(--gold-deep) 0%, var(--gold-bright) 32%, #fff6e0 48%, var(--gold-bright) 64%, var(--gold-deep) 100%);
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 7s linear infinite;
+p { margin: 0 0 1.05rem; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--gold-warm); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--cream); }
+
+em { font-style: italic; }
+
+.script { font-family: var(--font-script); font-weight: 400; }
+
+/* Small caps label — used sparingly, as a printed caption would be */
+.label {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
 }
 
-@keyframes shimmer {
-  to { background-position: 220% 0; }
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.rule--double {
+  border: 0;
+  border-top: 3px double var(--rule-firm);
+  margin: 0;
 }
 
 .sr-only {
@@ -122,126 +120,71 @@ a:hover { color: var(--snow); }
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
-  border: 0;
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold-bright);
-  outline-offset: 3px;
-  border-radius: 6px;
+  outline: 2px solid var(--gold-warm);
+  outline-offset: 2px;
 }
 
-/* ---- Snowfall canvas ---- */
-#snow-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* ---- Twinkling star field ---- */
-.starfield {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(1.6px 1.6px at 18% 12%, rgba(255,255,255,.85), transparent),
-    radial-gradient(1.2px 1.2px at 72% 8%,  rgba(255,255,255,.7), transparent),
-    radial-gradient(1.8px 1.8px at 42% 26%, rgba(255,245,210,.8), transparent),
-    radial-gradient(1.2px 1.2px at 88% 32%, rgba(255,255,255,.6), transparent),
-    radial-gradient(1.4px 1.4px at 8% 44%,  rgba(255,255,255,.55), transparent),
-    radial-gradient(1.6px 1.6px at 60% 54%, rgba(255,240,200,.6), transparent),
-    radial-gradient(1.2px 1.2px at 30% 70%, rgba(255,255,255,.5), transparent),
-    radial-gradient(1.5px 1.5px at 94% 76%, rgba(255,255,255,.55), transparent);
-  animation: twinkle 5.5s ease-in-out infinite alternate;
-}
-
-@keyframes twinkle {
-  from { opacity: .45; }
-  to   { opacity: 1; }
-}
-
-/* ---- Shared surfaces ---- */
-.panel {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
-  backdrop-filter: blur(14px) saturate(120%);
-  -webkit-backdrop-filter: blur(14px) saturate(120%);
-  box-shadow: var(--shadow-soft);
-}
-
-/* ---- Buttons ---- */
+/* ---- Buttons: letterpress blocks, hard edges, solid offset shadow ---- */
 .btn {
-  --btn-bg: linear-gradient(170deg, var(--holly-bright), var(--holly-deep));
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: .55rem;
-  padding: .85rem 1.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  background: var(--btn-bg);
-  color: var(--snow);
-  font: 600 0.95rem/1 var(--font-body);
-  letter-spacing: .02em;
+  gap: 0.5rem;
+  padding: 0.72rem 1.35rem;
+  border: 1.5px solid var(--cream);
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--cream);
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   text-decoration: none;
-  box-shadow: var(--shadow-holly);
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease), filter .3s var(--ease);
+  box-shadow: 4px 4px 0 var(--ink-deep);
+  transition: transform 0.12s steps(2), box-shadow 0.12s steps(2), background 0.2s;
 }
 
 .btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.08);
-  color: var(--snow);
-  box-shadow: 0 18px 44px -12px rgba(239, 41, 68, 0.72);
+  color: var(--cream);
+  background: var(--red-bright);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink-deep);
 }
 
-.btn:active { transform: translateY(0) scale(.99); }
-
-.btn--gold {
-  --btn-bg: linear-gradient(170deg, var(--gold-bright), var(--gold-deep));
-  color: #2b1b05;
-  box-shadow: var(--shadow-glow);
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink-deep);
 }
-.btn--gold:hover { color: #2b1b05; box-shadow: 0 18px 44px -12px rgba(240,200,113,.6); }
 
-.btn--ghost {
-  --btn-bg: transparent;
-  border-color: var(--hairline-gold);
-  color: var(--gold-bright);
+.btn--plain {
+  background: transparent;
+  border-color: var(--rule-firm);
+  color: var(--cream);
   box-shadow: none;
-  backdrop-filter: blur(8px);
 }
-.btn--ghost:hover { background: rgba(240, 200, 113, 0.12); color: var(--gold-bright); box-shadow: none; }
+.btn--plain:hover { background: rgba(242, 231, 210, 0.09); box-shadow: none; transform: none; }
 
-.btn--sm { padding: .55rem 1.05rem; font-size: .83rem; }
+.btn--gold { background: var(--gold); color: var(--ink-deep); border-color: var(--ink-deep); }
+.btn--gold:hover { background: var(--gold-warm); color: var(--ink-deep); }
 
-/* ---- Pills / tags ---- */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  padding: .32rem .8rem;
-  border-radius: 999px;
-  border: 1px solid var(--hairline-gold);
-  background: rgba(240, 200, 113, 0.08);
-  color: var(--gold-bright);
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+.btn--sm { padding: 0.46rem 0.9rem; font-size: 0.72rem; }
+
+/* ---- Snow ---- */
+#snow-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: .01ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
-
-/* Held-pointer state swaps in the happy-reindeer art */
-body.cursor-active, body.cursor-active * { cursor: var(--cursor-reindeer-active); }

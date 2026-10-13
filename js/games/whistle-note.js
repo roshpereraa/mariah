@@ -18,9 +18,9 @@ const MOVE_EVERY = 3200;    // ms between target jumps
 
 export default {
   id: 'whistle-note',
-  name: 'Hit The Note',
+  name: 'The Whistle Note',
   emoji: '\u{1F3A4}',
-  blurb: 'The famous whistle note, as a balancing act. Hold to climb, release to fall, and keep the needle inside the golden band for as long as you can hold it together.',
+  blurb: 'Hold to climb, let go to fall, keep the needle in the gold. The gold keeps moving.',
   scoreLabel: 'points',
 
   mount(root, host) {
@@ -49,7 +49,7 @@ export default {
       'aria-label': 'Hold to raise the note',
     }, el('strong', { text: 'Hold to sing' }), el('span', { text: 'mouse, touch or the space bar' }));
 
-    const hint = el('p', { class: 'game-hint', text: 'Score builds while the needle sits inside the gold. The band moves every few seconds.' });
+    const hint = el('p', { class: 'game-hint', text: 'Dead centre pays more than the edges.' });
     const wrap = el('div', { class: 'whistle' }, hud.node, meter, el('div', { class: 'whistle__bar' }, fill), pad, hint);
     root.replaceChildren(wrap);
 

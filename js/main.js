@@ -8,9 +8,9 @@ import { initArcade } from './arcade.js';
 import { watchReveals, toast, clamp } from './ui.js';
 
 const SOURCE_LABELS = {
-  local: 'Playing your local copy of the record.',
-  youtube: 'Streaming the official upload through YouTube.',
-  procedural: 'Streaming was unavailable, so here is a live sleigh-bell mix instead.',
+  local: 'Playing your own copy',
+  youtube: 'Streaming the official upload',
+  procedural: 'Stream blocked — playing the house band instead',
 };
 
 function bootScenery() {
@@ -41,8 +41,9 @@ function bootDock() {
   music.addEventListener('statechange', (e) => {
     const playing = e.detail.playing;
     icon.setAttribute('d', playing ? PAUSE : PLAY);
-    dock.classList.toggle('is-paused', !playing);
-    toggle.setAttribute('aria-label', playing ? 'Pause the music' : 'Play the music');
+    toggle.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    // The record on the sleeve turns only while something is actually playing.
+    document.body.classList.toggle('is-spinning', playing);
   });
 
   toggle.addEventListener('click', () => music.toggle());
@@ -74,6 +75,7 @@ function bootSplash() {
     if (entering) return;
     entering = true;
     button.disabled = true;
+    button.textContent = 'Spinning up…';
 
     // The click is the gesture browsers require before audio may play. Kick the
     // source chain off, but don't hold the page behind it — walking the chain
@@ -88,25 +90,25 @@ function bootSplash() {
 }
 
 function bootYear() {
-  const node = document.getElementById('year');
-  if (node) node.textContent = String(new Date().getFullYear());
+  const node = document.getElementById('year-line');
+  if (node) node.textContent = `Pressed ${new Date().getFullYear()}.`;
 }
 
-/** Countdown to the next 25 December, because of course. */
+/** Days to the next 25 December, run into the side-B caption. */
 function bootCountdown() {
-  const node = document.getElementById('days-to-go');
+  const node = document.getElementById('days-line');
   if (!node) return;
 
   const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const year = now.getMonth() === 11 && now.getDate() > 25
     ? now.getFullYear() + 1
     : now.getFullYear();
-  const xmas = new Date(year, 11, 25);
-  const days = Math.ceil((xmas - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+  const days = Math.round((new Date(year, 11, 25) - today) / 86400000);
 
-  node.textContent = days === 0 ? 'Today' : String(days);
-  const label = document.getElementById('days-to-go-label');
-  if (label && days === 0) label.textContent = 'Merry Christmas';
+  node.textContent = days === 0
+    ? 'Five tracks · it is Christmas Day'
+    : `Five tracks · ${days} day${days === 1 ? '' : 's'} to Christmas`;
 }
 
 function boot() {

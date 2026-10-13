@@ -36,7 +36,7 @@ export default {
   id: 'present-catch',
   name: 'Present Catch',
   emoji: '\u{1F6F7}',
-  blurb: 'Mariah has dropped the entire gift list out of the sleigh. Sweep it up before it hits the snow — and leave the coal alone.',
+  blurb: 'Gifts keep falling out of the sleigh. Catch them before the snow does. The coal is not a gift.',
   scoreLabel: 'points',
 
   mount(root, host) {
@@ -52,7 +52,7 @@ export default {
     const canvas = el('canvas', { class: 'game-canvas', width: W, height: H,
       'aria-label': 'Present Catch playfield' });
     const hint = el('p', { class: 'game-hint',
-      text: 'Move the pointer or use ← → to steer. Gifts score, coal costs you 20.' });
+      text: 'Pointer or arrow keys to steer. Coal costs you twenty.' });
     const wrap = el('div', {}, hud.node, canvas, hint);
 
     root.replaceChildren(wrap);
@@ -176,7 +176,7 @@ export default {
       ctx.translate(x, y);
 
       // Runner, with the upturn at the front.
-      ctx.strokeStyle = '#e0b44f';
+      ctx.strokeStyle = '#c9992f';
       ctx.lineWidth = 5;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -195,8 +195,8 @@ export default {
 
       // Body: tall back on the left, curled prow on the right.
       const grad = ctx.createLinearGradient(0, -SLEIGH_H, 0, 0);
-      grad.addColorStop(0, '#ef2944');
-      grad.addColorStop(1, '#7d0b1d');
+      grad.addColorStop(0, '#d2473a');
+      grad.addColorStop(1, '#8c251d');
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.moveTo(-SLEIGH_W / 2 + 2, -SLEIGH_H);
@@ -208,7 +208,7 @@ export default {
       ctx.closePath();
       ctx.fill();
 
-      ctx.strokeStyle = '#f0c871';
+      ctx.strokeStyle = '#e0b958';
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
@@ -227,13 +227,13 @@ export default {
 
       // sky
       const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#0b1430');
-      sky.addColorStop(0.62, '#20325c');
+      sky.addColorStop(0, '#0a140f');
+      sky.addColorStop(0.62, '#1b2f26');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, W, GROUND + 10);
 
       // distant hills
-      ctx.fillStyle = '#16284c';
+      ctx.fillStyle = '#17352a';
       ctx.beginPath();
       ctx.moveTo(0, GROUND - 40);
       ctx.quadraticCurveTo(W * 0.22, GROUND - 130, W * 0.46, GROUND - 48);
@@ -244,8 +244,8 @@ export default {
 
       // snow field
       const snow = ctx.createLinearGradient(0, GROUND - 10, 0, H);
-      snow.addColorStop(0, '#f7fbff');
-      snow.addColorStop(1, '#cfe0f5');
+      snow.addColorStop(0, '#f2e7d2');
+      snow.addColorStop(1, '#cdbfa6');
       ctx.fillStyle = snow;
       ctx.beginPath();
       ctx.moveTo(0, GROUND + 6);
@@ -269,8 +269,8 @@ export default {
 
       for (const p of state.pops) {
         ctx.globalAlpha = Math.max(0, p.life);
-        ctx.fillStyle = p.good ? '#ffdf9a' : '#ff8d9b';
-        ctx.font = 'bold 26px ui-sans-serif, system-ui, sans-serif';
+        ctx.fillStyle = p.good ? '#e0b958' : '#d2473a';
+        ctx.font = '500 26px Oswald, ui-sans-serif, system-ui, sans-serif';
         ctx.fillText(p.text, p.x, p.y);
         ctx.globalAlpha = 1;
       }

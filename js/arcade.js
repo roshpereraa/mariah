@@ -1,5 +1,5 @@
 /**
- * The arcade: launcher cards, the modal stage, and the host object each game
+ * Side B: the track listing, the modal stage, and the host object each game
  * gets handed (best score, score submission, restart, close).
  */
 
@@ -10,23 +10,23 @@ import { getBest, setBest } from './storage.js';
 let teardown = null;
 let lastFocus = null;
 
-const stage = {
-  root: null,
-  title: null,
-  body: null,
-};
+const stage = { root: null, title: null, no: null, body: null };
+
+/** B1, B2, … — the side-B track numbers. */
+const trackNo = (game) => `B${GAMES.indexOf(game) + 1}`;
 
 export function initArcade() {
-  const grid = document.getElementById('arcade');
+  const list = document.getElementById('arcade');
   stage.root = document.getElementById('stage');
   stage.title = document.getElementById('stage-title');
+  stage.no = document.getElementById('stage-no');
   stage.body = document.getElementById('stage-body');
 
-  if (!grid || !stage.root) return;
+  if (!list || !stage.root) return;
 
-  grid.replaceChildren(...GAMES.map(renderCard));
-  // The cards are injected after the page-wide pass, so reveal them here.
-  watchReveals(grid);
+  list.replaceChildren(...GAMES.map(renderTrack));
+  // These rows are injected after the page-wide pass, so reveal them here.
+  watchReveals(list);
 
   document.getElementById('stage-close')?.addEventListener('click', close);
   stage.root.addEventListener('click', (e) => { if (e.target === stage.root) close(); });
@@ -39,36 +39,34 @@ export function initArcade() {
   if (match && byId(match[1])) open(match[1]);
 }
 
-function renderCard(game) {
-  const best = getBest(game.id);
-  const bestNode = el('span', {
-    class: 'game-card__best',
-    text: best > 0 ? `Best · ${best}` : 'Not played yet',
-  });
-
-  const card = el('button', {
-    class: 'game-card reveal', type: 'button',
+function renderTrack(game) {
+  const row = el('button', {
+    class: 'track reveal', type: 'button',
     onclick: () => open(game.id),
   },
-    el('span', { class: 'game-card__emoji', 'aria-hidden': 'true', text: game.emoji }),
-    el('h3', { class: 'game-card__name', text: game.name }),
-    el('p', { class: 'game-card__blurb', text: game.blurb }),
-    el('span', { class: 'game-card__foot' },
-      bestNode,
-      el('span', { class: 'game-card__play', text: 'Play →' }),
+    el('span', { class: 'track__no', text: trackNo(game) }),
+    el('span', {},
+      el('span', { class: 'track__title', style: { display: 'block' }, text: game.name }),
+      el('span', { class: 'track__desc', style: { display: 'block' }, text: game.blurb }),
     ),
+    el('span', { class: 'track__meta' }, bestLabel(game.id)),
   );
 
-  card.dataset.gameId = game.id;
-  return card;
+  row.dataset.gameId = game.id;
+  return row;
 }
 
-/** Refresh the "Best · n" line on a card after a round. */
-function refreshCardBest(id) {
-  const card = document.querySelector(`.game-card[data-game-id="${id}"] .game-card__best`);
-  if (!card) return;
+/** The right-hand column: a best score, set like a track duration. */
+function bestLabel(id) {
   const best = getBest(id);
-  card.textContent = best > 0 ? `Best · ${best}` : 'Not played yet';
+  return best > 0
+    ? el('span', {}, el('b', { text: String(best) }), 'your best')
+    : el('span', { text: 'unplayed' });
+}
+
+function refreshTrackBest(id) {
+  const cell = document.querySelector(`.track[data-game-id="${id}"] .track__meta`);
+  if (cell) cell.replaceChildren(bestLabel(id));
 }
 
 export function open(id) {
@@ -79,6 +77,7 @@ export function open(id) {
 
   lastFocus = document.activeElement;
   stage.title.textContent = game.name;
+  stage.no.textContent = trackNo(game);
   stage.body.replaceChildren();
   stage.root.classList.add('is-open');
   stage.root.setAttribute('aria-hidden', 'false');
@@ -95,8 +94,8 @@ function makeHost(game) {
 
     submit(score) {
       const record = setBest(game.id, Math.round(score));
-      refreshCardBest(game.id);
-      if (record) toast(`❄ New best in ${game.name}: ${Math.round(score)}`);
+      refreshTrackBest(game.id);
+      if (record) toast(`New best on ${game.name}: ${Math.round(score)}`);
       return record;
     },
 

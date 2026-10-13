@@ -11,7 +11,7 @@ export default {
   id: 'memory-match',
   name: 'Ornament Memory',
   emoji: '\u{1F384}',
-  blurb: 'Sixteen baubles, eight pairs, one tree. Clear the board in as few flips as you can — fewer moves, higher score.',
+  blurb: 'Sixteen baubles, eight pairs. Twelve moves is a clean sweep. Everything after that costs you.',
   scoreLabel: 'points',
 
   mount(root, host) {
@@ -30,7 +30,7 @@ export default {
     ]);
 
     const grid = el('div', { class: 'memory-grid' });
-    const hint = el('p', { class: 'game-hint', text: 'Two flips a turn. A clean sweep in 12 moves is the record to beat.' });
+    const hint = el('p', { class: 'game-hint', text: 'Two flips a turn.' });
     const wrap = el('div', {}, hud.node, grid, hint);
     root.replaceChildren(wrap);
 

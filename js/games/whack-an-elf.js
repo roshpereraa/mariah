@@ -32,7 +32,7 @@ export default {
   id: 'whack-an-elf',
   name: 'Elf Patrol',
   emoji: '\u{1F9DD}',
-  blurb: 'Elves keep popping out of the snowdrifts to peek at the presents. Bop every elf, spare the imps, and keep your hands off the wrapped gifts.',
+  blurb: 'Elves surface in the drifts to count the presents. Bop the elves. The imps are a trap.',
   scoreLabel: 'points',
 
   mount(root, host) {
@@ -49,7 +49,7 @@ export default {
 
     const grid = el('div', { class: 'elf-grid' });
     const hint = el('p', { class: 'game-hint',
-      text: '\u{1F9DD} +10 · \u{1F385} +30 · \u{1F47F} −15 · \u{1F381} −10. They get quicker as the round goes on.' });
+      text: 'Elf +10. Santa +30. Imp −15. Wrapped gift −10. It speeds up.' });
     const wrap = el('div', {}, hud.node, grid, hint);
     root.replaceChildren(wrap);
 

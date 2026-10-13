@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>All I Want for Christmas Is You — A Festive Tribute</title>
-<meta name="description" content="A Christmassy fan tribute to Mariah Carey's 'All I Want for Christmas Is You' — music on open, falling snow, a reindeer cursor and five Christmas mini-games.">
-<meta name="theme-color" content="#0a1026">
+<title>All I Want for Christmas Is You — a sleeve note</title>
+<meta name="description" content="A fan tribute to Mariah Carey's 1994 Christmas single, built as a record sleeve: liner notes, a side B of five Christmas games, and the song playing throughout.">
+<meta name="theme-color" content="#101d18">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="All I Want for Christmas Is You — A Festive Tribute">
-<meta property="og:description" content="Snow, sleigh bells, a reindeer cursor and five Christmas mini-games.">
+<meta property="og:title" content="All I Want for Christmas Is You — a sleeve note">
+<meta property="og:description" content="Liner notes, five Christmas games on side B, and a reindeer for a cursor.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;500&family=Pinyon+Script&display=swap">
 
 <link rel="stylesheet" href="styles/base.css">
 <link rel="stylesheet" href="styles/layout.css">
@@ -22,253 +22,202 @@
 </head>
 <body>
 
-<div class="starfield" aria-hidden="true"></div>
 <canvas id="snow-canvas" aria-hidden="true"></canvas>
 <div id="yt-host" aria-hidden="true"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 
-<!-- ============================ splash gate ============================ -->
+<!-- ======================= the shrink-wrap ======================= -->
 <div id="splash">
   <div class="splash__inner">
-    <p class="splash__kicker">A festive fan tribute</p>
-    <h1 class="splash__title gold-text">All I Want<br>for Christmas</h1>
-    <p class="splash__sub">is you</p>
-    <button id="splash-btn" class="btn splash__btn" type="button">
-      Open the music box &nbsp;&#127925;
-    </button>
+    <p class="splash__sticker">Fan pressing &middot; not for resale</p>
+    <h1 class="splash__title">All I Want for Christmas <em>is you</em></h1>
     <p class="splash__note">
-      Browsers only allow sound after a click — so this one button starts the
-      music, the snow and the whole thing.
+      Sound needs a click before any browser will allow it. This is that click.
+    </p>
+    <p style="margin-top:1.7rem">
+      <button id="splash-btn" class="btn" type="button">Drop the needle</button>
     </p>
   </div>
 </div>
 
-<!-- ============================== top bar ============================== -->
-<header class="topbar">
-  <a class="brand" href="#top">
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M20 22 L14 11 M14 11 L6 9 M14 11 L13 2 M44 22 L50 11 M50 11 L58 9 M50 11 L51 2"
-            fill="none" stroke="#f0c871" stroke-width="4" stroke-linecap="round"/>
-      <ellipse cx="32" cy="38" rx="17" ry="18" fill="#a9703f"/>
-      <ellipse cx="32" cy="46" rx="10" ry="8" fill="#d9ad7c"/>
-      <circle cx="25" cy="34" r="3.4" fill="#20120a"/>
-      <circle cx="39" cy="34" r="3.4" fill="#20120a"/>
-      <circle cx="32" cy="47" r="5.4" fill="#ff2a40"/>
-    </svg>
-    <span>All I Want&nbsp;for&nbsp;Christmas</span>
-  </a>
-  <nav class="topnav" aria-label="Sections">
-    <a href="#arcade-section">Arcade</a>
-    <a href="#story">The Song</a>
-    <a href="#lyrics">Lyrics</a>
-    <a href="#about">About</a>
+<!-- ============================ masthead ============================ -->
+<header class="masthead">
+  <a class="masthead__name" href="#top">Carey <b>&middot;</b> Afanasieff <b>&middot;</b> 1994</a>
+  <nav aria-label="Sections">
+    <a href="#notes">Liner notes</a>
+    <a href="#side-b">Side B</a>
+    <a href="#colophon">Colophon</a>
   </nav>
 </header>
 
 <main id="top">
 
-  <!-- =============================== hero =============================== -->
-  <section class="shell hero">
-    <p class="hero__kicker"><span class="pill">Since 1994 &middot; Still undefeated</span></p>
-    <h1 class="hero__title gold-text">
-      All I Want for Christmas
-      <small>is you</small>
-    </h1>
-    <p class="hero__lead">
-      Mariah opens her mouth, the world puts up a tree. This is a fan-made
-      corner of the internet for the greatest Christmas song ever recorded —
-      with falling snow, a reindeer for a cursor, and five mini-games to lose
-      an afternoon to.
-    </p>
-    <div class="hero__cta">
-      <a class="btn" href="#arcade-section">Play the games &nbsp;&#127918;</a>
-      <a class="btn btn--ghost" href="#story">Read the story</a>
-    </div>
-
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Make my wish come true</span><span>&#10052;</span>
-        <span>All I want for Christmas is you</span><span>&#10057;</span>
-        <span>I don't want a lot for Christmas</span><span>&#10052;</span>
-        <span>Make my wish come true</span><span>&#10057;</span>
-        <span>All I want for Christmas is you</span><span>&#10052;</span>
-        <span>I don't want a lot for Christmas</span><span>&#10057;</span>
+  <!-- ============================ sleeve ============================ -->
+  <section class="shell sleeve">
+    <div>
+      <p class="sleeve__side">Side A &middot; one track &middot; repeats forever</p>
+      <h1 class="sleeve__title">All I Want for Christmas <em>is you</em></h1>
+      <p class="sleeve__credit">Mariah Carey</p>
+      <p class="sleeve__blurb">
+        Four minutes of sleigh bells and a key change, written to sound like it
+        came out in 1963 rather than 1994. It is playing now, and it will keep
+        playing. Side B is five games.
+      </p>
+      <div class="sleeve__cta">
+        <a class="btn" href="#side-b">Turn it over</a>
+        <a class="btn btn--plain" href="#notes">Read the sleeve</a>
       </div>
     </div>
-  </section>
 
-  <!-- ============================== stats =============================== -->
-  <section class="shell section" style="padding-top:0">
-    <div class="stats reveal">
-      <div class="stat">
-        <span class="stat__num gold-text" id="days-to-go">—</span>
-        <span class="stat__label" id="days-to-go-label">Days to Christmas</span>
-      </div>
-      <div class="stat">
-        <span class="stat__num gold-text">1994</span>
-        <span class="stat__label">Year released</span>
-      </div>
-      <div class="stat">
-        <span class="stat__num gold-text">2019</span>
-        <span class="stat__label">Year it hit No.&nbsp;1</span>
-      </div>
-      <div class="stat">
-        <span class="stat__num gold-text">5</span>
-        <span class="stat__label">Mini-games below</span>
-      </div>
+    <div class="record" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <g class="record__disc">
+          <circle cx="200" cy="200" r="196" fill="#0b0b0c"/>
+          <circle cx="200" cy="200" r="196" fill="none" stroke="#2a2a2c" stroke-width="1"/>
+          <g fill="none" stroke="#ffffff" stroke-opacity=".055">
+            <circle cx="200" cy="200" r="182"/><circle cx="200" cy="200" r="172"/>
+            <circle cx="200" cy="200" r="162"/><circle cx="200" cy="200" r="150"/>
+            <circle cx="200" cy="200" r="140"/><circle cx="200" cy="200" r="129"/>
+            <circle cx="200" cy="200" r="118"/><circle cx="200" cy="200" r="107"/>
+            <circle cx="200" cy="200" r="96"/>
+          </g>
+          <!-- sheen -->
+          <path d="M200 8a192 192 0 0 1 134 328l-14-14A172 172 0 0 0 200 28z" fill="#ffffff" opacity=".06"/>
+          <!-- label -->
+          <circle cx="200" cy="200" r="78" fill="#b3342a"/>
+          <circle cx="200" cy="200" r="78" fill="none" stroke="#c9992f" stroke-width="1.5"/>
+          <text x="200" y="176" text-anchor="middle" fill="#f2e7d2"
+                font-family="Oswald, sans-serif" font-size="15" letter-spacing="2.4">ALL I WANT</text>
+          <text x="200" y="196" text-anchor="middle" fill="#f2e7d2"
+                font-family="Oswald, sans-serif" font-size="15" letter-spacing="2.4">FOR CHRISTMAS</text>
+          <text x="200" y="218" text-anchor="middle" fill="#e0b958"
+                font-family="Pinyon Script, cursive" font-size="24">is you</text>
+          <text x="200" y="243" text-anchor="middle" fill="#f2e7d2" opacity=".72"
+                font-family="Oswald, sans-serif" font-size="9" letter-spacing="2">45 RPM</text>
+          <circle cx="200" cy="200" r="7" fill="#101d18"/>
+        </g>
+      </svg>
     </div>
   </section>
 
-  <!-- ============================== arcade ============================== -->
-  <section class="shell section" id="arcade-section">
-    <div class="section__head reveal">
-      <p class="pill">Santa's Arcade</p>
-      <h2 class="section__title gold-text">Five games, one soundtrack</h2>
+  <!-- ========================== liner notes ========================== -->
+  <section class="shell notes" id="notes">
+    <div class="notes__head">
+      <h2>Sleeve notes</h2>
+      <p class="label">Written on the back, as is traditional</p>
+    </div>
+
+    <div class="notes__cols reveal">
       <p>
-        Everything runs right here in the page — no loading screens, no accounts.
-        Your best score for each game is remembered on this device.
+        Carey and Walter Afanasieff wrote it for <em>Merry Christmas</em>, her
+        fourth album, out in October 1994. The brief was less a 1990s ballad
+        than a Phil Spector record: sleigh bells from the first bar, piano
+        hammering eighth notes, backing vocals stacked until they stop sounding
+        like people.
+      </p>
+      <p>
+        It did not go to number one. Not in 1994, and not for a long while
+        after. Christmas singles were kept off the Hot 100 by the chart rules of
+        the day, and by the time those rules changed the song had quietly become
+        something closer to infrastructure.
+      </p>
+      <p>
+        It finally reached the top in December 2019, twenty-five years late, as
+        Carey's nineteenth number one. It has gone back every December since,
+        which is less a comeback than a season.
+      </p>
+      <p>
+        What makes it work is the restraint in the lyric. No list, no North
+        Pole, no snow. She turns down every Christmas thing on offer and asks
+        for one that is not on the table. The arrangement spends four minutes
+        disagreeing with her at full volume.
       </p>
     </div>
-    <div class="arcade" id="arcade">
+
+    <p class="notes__pull">&ldquo;Make my wish come true &mdash; all I want for Christmas is you.&rdquo;</p>
+  </section>
+
+  <!-- ============================= side B ============================= -->
+  <section class="shell side-b" id="side-b">
+    <div class="side-b__head">
+      <h2>Side B</h2>
+      <p class="label" id="days-line">Five tracks</p>
+    </div>
+    <p class="side-b__sub">
+      Games, not songs. Each runs in the page and remembers your best score on
+      this device. The music keeps going underneath.
+    </p>
+
+    <div class="tracks" id="arcade">
       <noscript>
-        <p class="card">The mini-games need JavaScript switched on. The snow is
-        prettier with it too.</p>
+        <p style="padding:1.2rem 0">Side B needs JavaScript. Side A plays without it.</p>
       </noscript>
     </div>
   </section>
 
-  <!-- =============================== story ============================== -->
-  <section class="shell section" id="story">
-    <div class="section__head reveal">
-      <p class="pill">The Song</p>
-      <h2 class="section__title gold-text">A twenty-five-year run-up</h2>
-    </div>
-    <div class="cards">
-      <article class="card reveal">
-        <span class="card__icon" aria-hidden="true">&#127925;</span>
-        <h3>Written in a hurry</h3>
+  <!-- ============================ colophon ============================ -->
+  <section class="shell colophon" id="colophon">
+    <div class="colophon__grid">
+      <div>
+        <h3>The sound</h3>
         <p>
-          Mariah Carey and Walter Afanasieff put the song together for
-          <em>Merry Christmas</em>, her fourth studio album, released in
-          October 1994. It was built to sound like a 1960s Christmas record
-          rather than a 1990s one — sleigh bells, wall-of-sound piano, the lot.
+          Streamed from the official upload through YouTube's embed player. If
+          that is blocked, an original sleigh-bell arrangement is generated in
+          your browser instead, so the room is never quiet.
         </p>
-      </article>
-      <article class="card reveal">
-        <span class="card__icon" aria-hidden="true">&#128200;</span>
-        <h3>Number one, eventually</h3>
-        <p>
-          It took until December 2019 for the song to finally top the Billboard
-          Hot 100 — twenty-five years after release, and Mariah's nineteenth
-          chart-topper. It has returned to the summit every festive season since.
-        </p>
-      </article>
-      <article class="card reveal">
-        <span class="card__icon" aria-hidden="true">&#127876;</span>
-        <h3>A seasonal institution</h3>
-        <p>
-          It soundtracks the end of <em>Love Actually</em>, every shopping centre
-          from November onwards, and one very famous annual announcement that it
-          is officially time. The Queen of Christmas does not take the crown off.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ============================== lyrics ============================== -->
-  <section class="shell section" id="lyrics">
-    <div class="section__head reveal">
-      <p class="pill">Sing Along</p>
-      <h2 class="section__title gold-text">The bit everybody knows</h2>
-      <p>
-        You already have the words. Here is the shape of them — the full lyrics
-        belong to their publishers, so this is just the chorus everyone shouts.
-      </p>
-    </div>
-    <div class="cards">
-      <article class="card reveal" style="text-align:center">
-        <p class="script" style="font-size:clamp(1.5rem,4vw,2.2rem);color:var(--gold-bright);margin:0">
-          “Make my wish come true —<br>all I want for Christmas is you.”
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- =============================== about ============================== -->
-  <section class="shell section" id="about">
-    <div class="section__head reveal">
-      <p class="pill">About</p>
-      <h2 class="section__title gold-text">How this thing works</h2>
-    </div>
-    <div class="cards">
-      <article class="card reveal">
-        <span class="card__icon" aria-hidden="true">&#128266;</span>
-        <h3>The music</h3>
-        <p>
-          The player tries three sources in order: a licensed copy of the record
-          if one is present, then the official upload via YouTube's embed player,
-          and finally an original sleigh-bell mix generated live in your browser.
-          Something always plays.
-        </p>
-      </article>
-      <article class="card reveal">
-        <span class="card__icon" aria-hidden="true">&#129446;</span>
+      </div>
+      <div>
         <h3>The cursor</h3>
         <p>
-          That is a hand-drawn reindeer following your pointer, complete with a
-          glowing red nose, a happier face while you hold a click, and a trail of
-          magic dust behind it.
+          A reindeer. Its nose glows, it grins while you hold a click, and it
+          leaves a short trail of dust behind it.
         </p>
-      </article>
-      <article class="card reveal">
-        <span class="card__icon" aria-hidden="true">&#10052;</span>
-        <h3>The snow</h3>
+      </div>
+      <div>
+        <h3>The build</h3>
         <p>
-          A few hundred flakes on a canvas, with parallax depth and a wind that
-          wanders. It respects your reduced-motion setting, as does everything
-          else that moves here.
+          Hand-written HTML, CSS and JavaScript. No framework, no build step,
+          no dependencies. The snow is a canvas; the fallback music is an
+          oscillator.
         </p>
-      </article>
+      </div>
     </div>
+
+    <p class="fine-print">
+      Unofficial fan tribute. &ldquo;All I Want for Christmas Is You&rdquo; was
+      written by Mariah Carey and Walter Afanasieff, and all rights in the
+      composition and the recording belong to their owners. This page is not
+      affiliated with or endorsed by Mariah Carey or her labels, hosts no
+      recording of its own, and sells nothing.
+      <span id="year-line"></span>
+    </p>
   </section>
 </main>
 
-<!-- ============================= music dock ============================ -->
-<div class="dock is-paused" id="dock" role="group" aria-label="Music player">
-  <button class="dock__btn" id="dock-toggle" type="button" aria-label="Pause the music">
+<!-- ============================== dock ============================== -->
+<div class="dock" id="dock" role="group" aria-label="Playback">
+  <button class="dock__btn" id="dock-toggle" type="button" aria-label="Pause">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path id="dock-icon" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
   </button>
-  <div class="dock__viz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="dock__meta">
+  <span class="dock__meta">
     <span class="dock__title" id="dock-title">All I Want for Christmas Is You</span>
     <span class="dock__sub" id="dock-sub">Mariah Carey</span>
-  </div>
+  </span>
   <label class="sr-only" for="dock-volume">Volume</label>
   <input class="dock__slider" id="dock-volume" type="range" min="0" max="100" value="55">
 </div>
 
-<!-- ============================ game stage ============================= -->
+<!-- ============================== stage ============================== -->
 <div id="stage" role="dialog" aria-modal="true" aria-labelledby="stage-title" aria-hidden="true">
   <div class="stage__frame">
     <div class="stage__bar">
+      <span class="stage__no" id="stage-no">B1</span>
       <h2 class="stage__name" id="stage-title">Game</h2>
-      <button class="stage__close" id="stage-close" type="button" aria-label="Close game">&times;</button>
+      <button class="stage__close" id="stage-close" type="button" aria-label="Close">&times;</button>
     </div>
     <div class="stage__body" id="stage-body"></div>
   </div>
 </div>
-
-<footer class="footer">
-  <p>Made with sleigh bells and too much tinsel &middot; <span id="year">2025</span></p>
-  <small>
-    An unofficial fan tribute. “All I Want for Christmas Is You” was written by
-    Mariah Carey and Walter Afanasieff; all rights in the song and recording
-    belong to their respective owners. This site is not affiliated with, endorsed
-    by, or connected to Mariah Carey or her labels. No recording is hosted here —
-    the official version is streamed through YouTube's embed player, and the
-    fallback mix is original music generated in your browser.
-  </small>
-</footer>
 
 <script type="module" src="js/main.js"></script>
 </body>

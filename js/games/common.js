@@ -43,8 +43,8 @@ export function countdown(seconds, onTick, onDone) {
  */
 export function resultScreen({ score, line, record, onReplay }) {
   return el('div', { class: 'result' },
-    record ? el('span', { class: 'pill', text: 'New personal best' }) : null,
-    el('div', { class: 'result__score gold-text', text: score }),
+    record ? el('span', { class: 'result__flag', text: 'New best' }) : null,
+    el('div', { class: 'result__score', text: score }),
     el('p', { class: 'result__line', text: line }),
     el('div', { class: 'game-actions' },
       el('button', { class: 'btn btn--gold', onclick: onReplay }, 'Play again'),
