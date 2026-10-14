@@ -488,3 +488,105 @@ body.is-spinning .record__disc { animation-play-state: running; }
 /* ---------------- Scroll reveal (restrained) ---------------- */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------------- Countdown band ---------------- */
+.countdown-band { padding-block: clamp(1.6rem, 5vh, 2.6rem); }
+
+.counter {
+  border-top: 3px double var(--rule-firm);
+  border-bottom: 3px double var(--rule-firm);
+  padding-block: clamp(1.2rem, 3.5vh, 1.9rem);
+  text-align: center;
+}
+
+.counter__head {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+.counter__head b { font-weight: 500; color: var(--red-bright); }
+
+.counter__cells {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.counter__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0 0.3rem;
+  border-left: 1px solid var(--rule);
+}
+
+.counter__cell:first-child { border-left: 0; }
+
+.counter__value {
+  font-family: var(--font-num);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 8.5vw, 3.9rem);
+  line-height: 0.95;
+  color: var(--cream);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.counter__cell em {
+  font-family: var(--font-label);
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* The seconds tick, so hold them still and keep them quieter than the days. */
+.counter__cell:last-child .counter__value { color: var(--cream-dim); }
+
+.counter__caption {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--cream-dim);
+}
+
+/* ---- and then, on the day ---- */
+.counter--now { padding-block: clamp(1.8rem, 6vh, 3rem); }
+
+.counter__now {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 12vw, 6rem);
+  line-height: 0.92;
+  color: var(--red-bright);
+  animation: shiver 2.6s ease-in-out infinite;
+}
+
+.counter__nowsub {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  color: var(--gold-warm);
+}
+
+@keyframes shiver {
+  0%, 100% { transform: none; }
+  25%      { transform: translate(-1.5px, 1px) rotate(-0.35deg); }
+  75%      { transform: translate(1.5px, -1px) rotate(0.35deg); }
+}
+
+@media (max-width: 430px) {
+  .counter__cell { padding: 0 0.15rem; }
+  .counter__cell em { font-size: 0.52rem; letter-spacing: 0.1em; }
+}
+
+/* On the day itself, the sleeve picks up the gold. */
+body.is-christmas .sleeve__side,
+body.is-christmas .masthead__name b { color: var(--gold-warm); }

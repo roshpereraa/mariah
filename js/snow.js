@@ -7,6 +7,7 @@ export function startSnow(canvas) {
   let w = 0, h = 0, dpr = 1;
   let wind = 0, windTarget = 0;
   let raf = null;
+  let densityScale = 1;
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -16,7 +17,8 @@ export function startSnow(canvas) {
     canvas.height = Math.floor(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const target = reduced ? 50 : Math.round(Math.min(320, (w * h) / 4200));
+    const base = reduced ? 50 : Math.min(320, (w * h) / 4200);
+    const target = Math.round(base * densityScale);
     flakes = Array.from({ length: target }, makeFlake);
   }
 
@@ -73,5 +75,9 @@ export function startSnow(canvas) {
   addEventListener('resize', resize, { passive: true });
   raf = requestAnimationFrame(frame);
 
-  return () => { cancelAnimationFrame(raf); removeEventListener('resize', resize); };
+  return {
+    stop() { cancelAnimationFrame(raf); removeEventListener('resize', resize); },
+    /** Christmas Day gets a heavier fall. */
+    setDensityScale(n) { densityScale = n; resize(); },
+  };
 }

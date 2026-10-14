@@ -5,6 +5,7 @@ import { music } from './audio.js';
 import { startSnow } from './snow.js';
 import { startCursorMagic } from './cursor.js';
 import { initArcade } from './arcade.js';
+import { startCountdown } from './countdown.js';
 import { watchReveals, toast, clamp } from './ui.js';
 
 const SOURCE_LABELS = {
@@ -15,9 +16,12 @@ const SOURCE_LABELS = {
 
 function bootScenery() {
   const canvas = document.getElementById('snow-canvas');
-  if (canvas) startSnow(canvas);
+  const snow = canvas ? startSnow(canvas) : null;
   startCursorMagic();
   watchReveals();
+
+  // When the countdown flips over, let it snow properly.
+  addEventListener('christmas', () => snow?.setDensityScale(2.1), { once: true });
 }
 
 function bootDock() {
@@ -94,30 +98,13 @@ function bootYear() {
   if (node) node.textContent = `Pressed ${new Date().getFullYear()}.`;
 }
 
-/** Days to the next 25 December, run into the side-B caption. */
-function bootCountdown() {
-  const node = document.getElementById('days-line');
-  if (!node) return;
-
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const year = now.getMonth() === 11 && now.getDate() > 25
-    ? now.getFullYear() + 1
-    : now.getFullYear();
-  const days = Math.round((new Date(year, 11, 25) - today) / 86400000);
-
-  node.textContent = days === 0
-    ? 'Five tracks · it is Christmas Day'
-    : `Five tracks · ${days} day${days === 1 ? '' : 's'} to Christmas`;
-}
-
 function boot() {
   bootScenery();
   bootDock();
   bootSplash();
   bootArcadeSafely();
   bootYear();
-  bootCountdown();
+  startCountdown(document.getElementById('countdown'));
 }
 
 /** A broken game must never take the rest of the page down with it. */

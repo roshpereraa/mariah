@@ -19,6 +19,7 @@ Web Audio API.
 | **Music on open** | A three-tier source chain that always produces sound (see below) |
 | **Reindeer cursor** | Hand-drawn SVG cursor with a glowing nose, a happier face while you hold a click, and a trail of magic dust |
 | **Snowfall** | A few hundred canvas flakes with parallax depth and a wind that wanders |
+| **Countdown** | Live counter to 25 December in the viewer's local time; on the day it becomes "It's tiiiime." |
 | **Five games on side B** | Present Catch, Elf Patrol, Ornament Memory, The Whistle Note, Mistletoe Trivia |
 | **High scores** | Kept per game in `localStorage`, printed beside each track like a duration |
 
@@ -96,6 +97,7 @@ js/
   snow.js  cursor.js  scenery
   ui.js  storage.js   element builder, toast, reveals, high scores
   arcade.js           the side-B track listing and the modal stage
+  countdown.js        the counter, and the moment it flips over
   games/              one module per game, plus shared HUD helpers
 assets/               reindeer cursor art and the favicon
 audio/                where you drop your own licensed copy (gitignored)
